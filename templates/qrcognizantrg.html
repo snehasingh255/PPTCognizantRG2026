@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name ="viewport">
+    <title>COGNIZANT PRE-PLACEMENT TALK REGISTRATION</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 60px auto;
+            background: #ffffff;
+            padding: 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 25px;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            background-color: #0078D4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005a9e;
+        }
+
+        .result {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .instruction {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #e67e22;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="/static/img/indiralogo.png" alt="Indira College Logo" class="logo">
+        <h1>COGNIZANT PRE-PLACEMENT REGISTRATION-2026</h1>
+        <form method="POST">
+            <input type="text" name="prn" placeholder="Enter your PRN Number" required>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        {% if status %}
+            <div class="result">{{ status }}</div>
+            <div class="instruction">
+                <strong>Note:</strong> You need to show this status to the Placement Coordinators. Only then will you be allowed to enter the auditorium, once verified.
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
