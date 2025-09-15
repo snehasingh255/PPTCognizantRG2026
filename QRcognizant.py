@@ -7,17 +7,21 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 params = urllib.parse.quote_plus(
-    "DRIVER={SQL Server};SERVER=LAPTOP-OLBB6UPV\SQLEXPRESS;DATABASE=PRNDB;UID=RGCHECK;PWD=COGNIZANTUG2026"
+    "DRIVER={ODBC Driver 17 for SQL Server};"
+    "SERVER=LAPTOP-OLBB6UPV\\SQLEXPRESS;"
+    "DATABASE=PRNDB;"
+    "Trusted_Connection=YES;"
 )
+
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mssql+pyodbc:///?odbc_connect={params}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-class Registered(db.Model):
+class REGISTEREDPRNS(db.Model):
     prn = db.Column(db.String(20), primary_key=True)
 
-class Used(db.Model):
+class USEDPRNS(db.Model):
     prn = db.Column(db.String(20), primary_key=True)    
 
 registered_df = pd.read_csv('RGCognizant-UG2026.csv')
@@ -41,12 +45,12 @@ def check():
         prn = request.form['prn'].strip()
         if not prn.isdigit():
             status = "❌ Invalid PRN format."
-        elif Registered.query.get(prn):
-            if Used.query.get(prn):
+        elif REGISTEREDPRNS.query.get(prn):
+            if USEDPRNS.query.get(prn):
                 status = "⚠️ Already Verified"
             else:
                 status = "✅ You are Registered!"
-                db.session.add(Used(prn=prn))
+                db.session.add(USEDPRNS(prn=prn))
                 db.session.commit()
         else:
             status = "❌ You are Not Registered."
