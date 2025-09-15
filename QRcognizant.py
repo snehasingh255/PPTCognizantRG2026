@@ -4,6 +4,7 @@ import os
 import logging
 import urllib
 from flask_sqlalchemy import SQLAlchemy
+import pyodbc
 
 app = Flask(__name__)
 params = urllib.parse.quote_plus(
